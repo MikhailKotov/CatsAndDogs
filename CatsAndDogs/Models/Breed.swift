@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: - Breed
+
 struct Breed: Identifiable, Codable {
     let id: String
     // Main fields

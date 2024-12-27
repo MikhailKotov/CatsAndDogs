@@ -12,7 +12,6 @@ protocol CatServiceProtocol {
 }
 
 final class CatService: CatServiceProtocol {
-
     private let session: URLSession
     private let baseURL: String
     private let apiKey: String
@@ -29,7 +28,7 @@ final class CatService: CatServiceProtocol {
         }
         urlComponents.queryItems = [
             URLQueryItem(name: "limit", value: "\(limit)"),
-            URLQueryItem(name: "page", value: "\(page)")
+            URLQueryItem(name: "page", value: "\(page)"),
         ]
         guard let url = urlComponents.url else {
             throw URLError(.badURL)
@@ -37,11 +36,12 @@ final class CatService: CatServiceProtocol {
         var request = URLRequest(url: url)
         // The Cat API expects an "x-api-key" header
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
-        
+
         let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
+              httpResponse.statusCode == 200
+        else {
             throw URLError(.badServerResponse)
         }
         do {

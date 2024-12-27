@@ -5,19 +5,17 @@
 //  Created by Mykhailo Kotov on 27/12/2024.
 //
 
-
 import SwiftUI
 
 struct CatBreedsListView: View {
-    
     @ObservedObject var viewModel: CatBreedsViewModel
-    
+
     // Two-column flexible layout
     private let columns = [
         GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible()),
     ]
-    
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in

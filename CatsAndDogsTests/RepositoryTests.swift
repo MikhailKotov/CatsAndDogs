@@ -5,8 +5,8 @@
 //  Created by Mykhailo Kotov on 27/12/2024.
 //
 
-import Testing
 @testable import CatsAndDogs
+import Testing
 
 struct RepositoryTests {
     @Test func testGetInitialBreeds() async throws {
@@ -14,12 +14,12 @@ struct RepositoryTests {
         mockService.firstPageBreeds = [
             Breed(id: "0", name: "Breed1"),
             Breed(id: "1", name: "Breed2"),
-            Breed(id: "2", name: "Breed3")
+            Breed(id: "2", name: "Breed3"),
         ]
 
         let repository = await CatRepository(service: mockService, limit: 3)
         let breeds = await repository.getInitialBreeds()
-        
+
         #expect(breeds.count == 3)
         #expect(breeds.first?.name == "Breed1")
         #expect(breeds.first?.id == "0")
@@ -30,11 +30,11 @@ struct RepositoryTests {
         mockService.firstPageBreeds = [
             Breed(id: "0", name: "Breed1"),
             Breed(id: "1", name: "Breed2"),
-            Breed(id: "2", name: "Breed3")
+            Breed(id: "2", name: "Breed3"),
         ]
         mockService.secondPageBreeds = [
             Breed(id: "3", name: "Breed4"),
-            Breed(id: "4", name: "Breed5")
+            Breed(id: "4", name: "Breed5"),
         ]
         // Arrange
         let repository = await CatRepository(service: mockService, limit: 3)
@@ -54,11 +54,11 @@ struct RepositoryTests {
         mockService.firstPageBreeds = [
             Breed(id: "0", name: "Breed1"),
             Breed(id: "1", name: "Breed2"),
-            Breed(id: "2", name: "Breed3")
+            Breed(id: "2", name: "Breed3"),
         ]
         mockService.secondPageBreeds = [
             Breed(id: "3", name: "Breed4"),
-            Breed(id: "4", name: "Breed5")
+            Breed(id: "4", name: "Breed5"),
         ]
         let repository = await CatRepository(service: mockService, limit: 3)
         var breeds = await repository.getInitialBreeds()
@@ -75,11 +75,11 @@ struct RepositoryTests {
         mockService.firstPageBreeds = [
             Breed(id: "0", name: "Breed1"),
             Breed(id: "1", name: "Breed2"),
-            Breed(id: "2", name: "Breed3")
+            Breed(id: "2", name: "Breed3"),
         ]
         mockService.secondPageBreeds = [
             Breed(id: "3", name: "Breed4"),
-            Breed(id: "4", name: "Breed5")
+            Breed(id: "4", name: "Breed5"),
         ]
         let repository = await CatRepository(service: mockService, limit: 10)
         var breeds = await repository.getInitialBreeds()
@@ -99,6 +99,5 @@ struct RepositoryTests {
         breeds = await repository.getNextPage()
         #expect(breeds.count == 0) // nothing was changed because error
         #expect(mockService.fetchBreedsCallCount == 2) // number of calls
-
     }
 }

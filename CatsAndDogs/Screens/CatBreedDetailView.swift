@@ -5,18 +5,17 @@
 //  Created by Mykhailo Kotov on 27/12/2024.
 //
 
-
 import SwiftUI
 
 struct CatBreedDetailView: View {
     let breed: Breed
-    
+
     var body: some View {
         VStack(spacing: 16) {
-            
             // Show breed image (if available)
             if let urlString = breed.image?.url,
-               let url = URL(string: urlString) {
+               let url = URL(string: urlString)
+            {
                 AsyncImage(url: url) { image in
                     image
                         .resizable()
@@ -30,7 +29,7 @@ struct CatBreedDetailView: View {
                 Rectangle()
                     .fill(Color.gray)
                     .frame(maxWidth: .infinity, maxHeight: 300)
-                    .overlay{
+                    .overlay {
                         Image(.cat)
                             .resizable()
                             .scaledToFit()
@@ -42,20 +41,21 @@ struct CatBreedDetailView: View {
             Text(breed.name)
                 .font(.title)
                 .padding(.horizontal)
-            
+
             // Description
             Text(breed.description ?? "No Description Available")
                 .font(.body)
                 .padding(.horizontal)
 
             // MARK: - Fun Facts Section
+
             VStack(alignment: .leading, spacing: 12) {
                 Text("Fun Facts")
                     .font(.headline)
                     .underline()
 
                 if let temperament = breed.temperament {
-                    HStack (alignment: .top) {
+                    HStack(alignment: .top) {
                         Text("💥 Temperament:")
                             .fontWeight(.semibold)
                         Text(temperament)
@@ -97,9 +97,12 @@ struct CatBreedDetailView: View {
                     }
                 }
             }
+
             // MARK: - Wikipedia Link
+
             if let wikiURLString = breed.wikipedia_url,
-               let wikiURL = URL(string: wikiURLString) {
+               let wikiURL = URL(string: wikiURLString)
+            {
                 Link(destination: wikiURL) {
                     HStack {
                         Text("🔍 Find more on Wikipedia")

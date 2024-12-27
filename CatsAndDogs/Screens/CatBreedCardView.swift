@@ -16,7 +16,8 @@ struct CatBreedCardView: View {
             ZStack {
                 // Load image
                 if let urlString = breed.image?.url,
-                   let url = URL(string: urlString) {
+                   let url = URL(string: urlString)
+                {
                     AsyncImage(url: url) { image in
                         image
                             .resizable()
@@ -30,7 +31,7 @@ struct CatBreedCardView: View {
                     Rectangle()
                         .fill(Color.gray)
                         .frame(width: width, height: width)
-                        .overlay{
+                        .overlay {
                             Image(.cat)
                                 .resizable()
                                 .padding(16)
@@ -43,8 +44,8 @@ struct CatBreedCardView: View {
                         startPoint: .top,
                         endPoint: .bottom
                     )
-                    .frame(height: width/4.0)
-                    .frame(maxWidth: .infinity)       // Expand horizontally
+                    .frame(height: width / 4.0)
+                    .frame(maxWidth: .infinity) // Expand horizontally
                     .overlay(
                         // 3. Text on top of the gradient
                         Text(breed.name)
@@ -60,5 +61,4 @@ struct CatBreedCardView: View {
             .clipShape(RoundedRectangle(cornerRadius: 16))
         }
     }
-
 }

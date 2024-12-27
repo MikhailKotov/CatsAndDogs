@@ -8,7 +8,6 @@
 import Testing
 
 struct CatsAndDogsTests {
-
     @Test func example() async throws {
         #expect(true) // :)
     }

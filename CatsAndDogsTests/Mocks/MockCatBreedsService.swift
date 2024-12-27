@@ -5,23 +5,21 @@
 //  Created by Mykhailo Kotov on 27/12/2024.
 //
 
-
-import Foundation
 @testable import CatsAndDogs
+import Foundation
 
 final class MockCatService: CatServiceProtocol {
-    
     var fetchBreedsCallCount = 0
     var shouldThrowError = false
-    
+
     // You can customize these to simulate various scenarios
     var firstPageBreeds: [Breed] = []
     var secondPageBreeds: [Breed] = []
     var thirdPageBreeds: [Breed] = []
 
-    func fetchBreeds(limit: Int, page: Int) async throws -> [Breed] {
+    func fetchBreeds(limit _: Int, page: Int) async throws -> [Breed] {
         fetchBreedsCallCount += 1
-        
+
         if shouldThrowError {
             throw URLError(.badServerResponse)
         }

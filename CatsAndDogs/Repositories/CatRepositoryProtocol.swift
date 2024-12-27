@@ -1,10 +1,9 @@
 //
-//  CatBreedsRepositoryProtocol.swift
+//  CatRepositoryProtocol.swift
 //  CatsAndDogs
 //
 //  Created by Mykhailo Kotov on 27/12/2024.
 //
-
 
 import Foundation
 
@@ -16,29 +15,28 @@ protocol CatRepositoryProtocol: AnyObject {
 }
 
 final class CatRepository: CatRepositoryProtocol {
-    
     private let service: CatServiceProtocol
     private let limit: Int
     private var currentPage: Int
     private var hasMoreData: Bool
-    
+
     // In-memory storage of already fetched breeds
     private var allBreeds: [Breed] = []
-    
+
     init(service: CatServiceProtocol, limit: Int = 10) {
         self.service = service
         self.limit = limit
-        self.currentPage = 0
-        self.hasMoreData = true
+        currentPage = 0
+        hasMoreData = true
     }
-    
+
     /// Fetches the first page of breeds (page = 0).
     @MainActor
     func getInitialBreeds() async -> [Breed] {
         resetPagination()
         return await getNextPage()
     }
-    
+
     /// Fetches the next page of breeds if more data is available and return all breeds.
     @MainActor
     func getNextPage() async -> [Breed] {
@@ -60,7 +58,7 @@ final class CatRepository: CatRepositoryProtocol {
             return allBreeds
         }
     }
-    
+
     /// Reset pagination and clear cache
     @MainActor
     func resetPagination() {

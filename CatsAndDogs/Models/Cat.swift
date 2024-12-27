@@ -12,6 +12,3 @@ struct Cat: Codable, Identifiable {
     let height: Int?
     let breeds: [Breed]
 }
-
-
-

@@ -7,7 +7,7 @@
 @testable import CatsAndDogs
 
 extension Breed {
-    init (id: String, name: String) {
+    init(id: String, name: String) {
         self.init(
             id: id,
             weight: .init(imperial: "", metric: ""),
@@ -20,6 +20,7 @@ extension Breed {
             shedding_level: nil, social_needs: nil, stranger_friendly: nil, vocalisation: nil,
             experimental: nil, hairless: nil, natural: nil, rare: nil, rex: nil,
             suppressed_tail: nil, short_legs: nil, wikipedia_url: nil, hypoallergenic: nil,
-            reference_image_id: nil, image: nil)
+            reference_image_id: nil, image: nil
+        )
     }
 }

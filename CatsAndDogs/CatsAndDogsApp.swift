@@ -11,9 +11,8 @@ import SwiftUI
 struct CatsAndDogsApp: App {
     var body: some Scene {
         WindowGroup {
-            // FIXME: Add DI
-            let dependency = DependencyContainer.shared
-            let viewModel = DependencyContainer.shared.makeCatBreedsViewModel()
+            let dependency = DependencyContainer()
+            let viewModel = dependency.makeCatBreedsViewModel()
             CatBreedsListView(viewModel: viewModel)
         }
     }

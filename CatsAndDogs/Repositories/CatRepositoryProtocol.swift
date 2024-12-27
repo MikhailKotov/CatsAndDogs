@@ -39,27 +39,21 @@ final class CatRepository: CatRepositoryProtocol {
         return await getNextPage()
     }
     
-    /// Fetches the next page of breeds if more data is available.
+    /// Fetches the next page of breeds if more data is available and return all breeds.
     @MainActor
     func getNextPage() async -> [Breed] {
         guard hasMoreData else {
             return allBreeds
         }
-        
         do {
             let fetchedBreeds = try await service.fetchBreeds(limit: limit, page: currentPage)
-            
-            // If the fetched array is smaller than 'limit', we know there is no more data
             if fetchedBreeds.count < limit {
                 hasMoreData = false
             }
-            
             currentPage += 1
             print(">> Fetched \(fetchedBreeds.count) breeds, current page: \(currentPage).\n    Ids:\n      \(fetchedBreeds.map(\.id).joined(separator: "\n     "))")
             allBreeds.append(contentsOf: fetchedBreeds)
-            
             return allBreeds
-            
         } catch {
             print("Error fetching next page: \(error)")
             // In case of error, we might assume we can try again, so we won't set hasMoreData = false

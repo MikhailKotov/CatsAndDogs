@@ -10,13 +10,10 @@ import Foundation
 
 final class DependencyContainer {
 
-    // Singleton for convenience; you could also create multiple containers if needed.
-    static let shared = DependencyContainer()
-
-    private init() {}
+    init() {}
 
     // MARK: - Environment / Config
-    private let apiKey = "live_UVs6JegVjd25LLtL7UHNpoQxzszMXaht2pJ9komCPG4KtKkfALFcQGrvc4eErrK8"
+    private let apiKey = "API_KEY"
     private let baseURL = "https://api.thecatapi.com/v1/breeds"
 
     // MARK: - URLSession

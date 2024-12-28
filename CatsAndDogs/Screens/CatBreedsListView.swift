@@ -39,6 +39,8 @@ struct CatBreedsListView: View {
                 guard viewModel.breeds.isEmpty, !viewModel.isLoadingPage else { return }
                 viewModel.loadInitialBreeds()
             }
+            Text("No Selection")
+                .font(.headline)
         }
     }
 }

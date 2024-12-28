@@ -20,14 +20,7 @@ final class DependencyContainer {
     // Customize your URLSession if you want to enable system URLCache or custom headers.
     private lazy var urlSession: URLSession = {
         let configuration = URLSessionConfiguration.default
-
-        // Enabling a disk & memory cache and prefer cached data
-        configuration.urlCache = URLCache(
-            memoryCapacity: 512 * 1024 * 1024, // 512 MB
-            diskCapacity: 1024 * 1024 * 1024, // 1 GB
-            diskPath: "com.catsanddogs.urlcache"
-        )
-        configuration.requestCachePolicy = .returnCacheDataElseLoad
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
 
         return URLSession(configuration: configuration)
     }()

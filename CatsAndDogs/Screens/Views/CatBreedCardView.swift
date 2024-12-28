@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CatBreedCardView: View {
     @State var breed: Breed
+    @Environment(\.imageSession) var imageSession
 
     var body: some View {
         GeometryReader { geometry in
@@ -18,13 +19,13 @@ struct CatBreedCardView: View {
                 if let urlString = breed.image?.url,
                    let url = URL(string: urlString)
                 {
-                    AsyncImage(url: url) { image in
+                    CustomAsyncImage(url: url, success: { image in
                         image
                             .resizable()
                             .scaledToFill()
-                    } placeholder: {
+                    }, placeholder: {
                         ProgressView()
-                    }
+                    }, session: imageSession)
                     .frame(width: width, height: width)
                 } else {
                     // No image
@@ -40,7 +41,7 @@ struct CatBreedCardView: View {
                 VStack {
                     Spacer()
                     LinearGradient(
-                        gradient: Gradient(colors: [.clear, .gray]),
+                        gradient: Gradient(colors: [.clear, .gray.opacity(0.8), .gray]),
                         startPoint: .top,
                         endPoint: .bottom
                     )
@@ -51,8 +52,8 @@ struct CatBreedCardView: View {
                         Text(breed.name)
                             .font(.caption)
                             .lineLimit(2)
-                            .foregroundColor(.primary)
-                            .padding(.bottom, 8)
+                            .foregroundColor(.white)
+                            .padding(.bottom, 4)
                             .padding(.horizontal, 16),
                         alignment: .bottomLeading
                     )

@@ -19,6 +19,7 @@ struct CatBreedDetailView: View {
                     .clipShape(.rect)
                     .cornerRadius(16)
                 CatDescriptionView(breed: breed)
+                Spacer()
             }
             .padding(.top)
             .navigationTitle(breed.name)
@@ -29,6 +30,7 @@ struct CatBreedDetailView: View {
                     .clipShape(.rect)
                     .cornerRadius(16)
                 CatDescriptionView(breed: breed)
+                Spacer()
             }
             .padding(.top)
             .navigationTitle(breed.name)

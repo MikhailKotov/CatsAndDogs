@@ -12,7 +12,7 @@ struct CatDescriptionView: View {
 
     var body: some View {
         ScrollView{
-            VStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 16) {
                 // Description
                 Text(breed.description ?? "No Description Available")
                     .font(.body)

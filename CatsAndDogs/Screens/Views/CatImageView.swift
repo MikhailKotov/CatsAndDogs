@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CatImageView: View {
+    @Environment(\.imageSession) var imageSession
     @State var breed: Breed
 
     var body: some View {
@@ -15,7 +16,7 @@ struct CatImageView: View {
         if let urlString = breed.image?.url,
            let url = URL(string: urlString)
         {
-            AsyncImage(url: url) { image in
+            CustomAsyncImage(url: url, success: { image in
                 ZStack {
                     image
                         .resizable()
@@ -25,16 +26,15 @@ struct CatImageView: View {
                     image
                         .resizable()
                         .scaledToFit()
-                        .frame(maxWidth: 300)
+                        .frame(maxWidth: 300, maxHeight: 300)
                 }
-            } placeholder: {
+            }, placeholder: {
                 ProgressView()
-            }
+            }, session: imageSession)
         } else {
             // No image
             Rectangle()
                 .fill(.gray)
-//                .frame(width: 300, height: 300)
                 .overlay {
                     Image(.cat)
                         .resizable()

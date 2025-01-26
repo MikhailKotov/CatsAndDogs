@@ -19,7 +19,7 @@ struct CatDescriptionView: View {
                 // MARK: - Fun Facts Section
                 funFact
                 // MARK: - Wikipedia Link
-                if let wikiURLString = breed.wikipedia_url,
+                if let wikiURLString = breed.wikipediaUrl,
                    let wikiURL = URL(string: wikiURLString)
                 {
                     wikiLink(wikiURL)
@@ -54,7 +54,7 @@ struct CatDescriptionView: View {
                 }
             }
 
-            if let lifeSpan = breed.life_span {
+            if let lifeSpan = breed.lifeSpan {
                 HStack {
                     Text("🕓 Life Span:")
                         .fontWeight(.semibold)
@@ -62,7 +62,7 @@ struct CatDescriptionView: View {
                 }
             }
 
-            if let energyLevel = breed.energy_level {
+            if let energyLevel = breed.energyLevel {
                 HStack {
                     Text("⚡ Energy Level:")
                         .fontWeight(.semibold)

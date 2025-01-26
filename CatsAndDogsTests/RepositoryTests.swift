@@ -17,7 +17,7 @@ struct RepositoryTests {
             Breed(id: "2", name: "Breed3"),
         ]
 
-        let repository = await CatRepository(service: mockService, limit: 3)
+        let repository = await CatRepositoryImpl(service: mockService, limit: 3)
         let breeds = await repository.getInitialBreeds()
 
         #expect(breeds.count == 3)
@@ -37,7 +37,7 @@ struct RepositoryTests {
             Breed(id: "4", name: "Breed5"),
         ]
         // Arrange
-        let repository = await CatRepository(service: mockService, limit: 3)
+        let repository = await CatRepositoryImpl(service: mockService, limit: 3)
         var breeds = await repository.getInitialBreeds()
         #expect(breeds.count == 3)
         breeds = await repository.getNextPage()
@@ -60,7 +60,7 @@ struct RepositoryTests {
             Breed(id: "3", name: "Breed4"),
             Breed(id: "4", name: "Breed5"),
         ]
-        let repository = await CatRepository(service: mockService, limit: 3)
+        let repository = await CatRepositoryImpl(service: mockService, limit: 3)
         var breeds = await repository.getInitialBreeds()
         #expect(breeds.count == 3)
         breeds = await repository.getNextPage()
@@ -81,7 +81,7 @@ struct RepositoryTests {
             Breed(id: "3", name: "Breed4"),
             Breed(id: "4", name: "Breed5"),
         ]
-        let repository = await CatRepository(service: mockService, limit: 10)
+        let repository = await CatRepositoryImpl(service: mockService, limit: 10)
         var breeds = await repository.getInitialBreeds()
         #expect(breeds.count == 3)
         // we detect that previous request was last because request limit more then number of items in response
@@ -92,7 +92,7 @@ struct RepositoryTests {
     @Test func testErrorFetching() async {
         let mockService = MockCatService()
         mockService.shouldThrowError = true
-        let repository = await CatRepository(service: mockService, limit: 3)
+        let repository = await CatRepositoryImpl(service: mockService, limit: 3)
         var breeds = await repository.getInitialBreeds()
         #expect(breeds.count == 0) // nothing was changed because error
         #expect(mockService.fetchBreedsCallCount == 1) // number of calls

@@ -5,43 +5,43 @@
 //  Created by Mykhailo Kotov on 27/12/2024.
 //
 
+import Factory
 import SwiftUI
 
 @MainActor
 class CatBreedsViewModel: ObservableObject {
     @Published var breeds: [Breed] = []
+    @Published var error: Error?
     @Published var isLoadingPage = false
+    @Published var isLastPage: Bool = false
 
-    private let repository: CatRepositoryProtocol
+    @ObservationIgnored
+    @Injected(\.nextBreedUseCase) private var nextBreedUseCase
+    private let limit: Int = 10
+    @ObservationIgnored
+    private var currentPage: Int = 0
 
-    init(repository: CatRepositoryProtocol) {
-        self.repository = repository
-    }
 
-    func loadInitialBreeds() {
+    func loadNextPageOfBreeds() {
         Task {
-            isLoadingPage = true
-            breeds = await repository.getInitialBreeds()
-            isLoadingPage = false
-        }
-    }
-
-    func loadNextPageIfNeeded(currentItem item: Breed?) {
-        guard !isLoadingPage else { return }
-
-        if let item = item, let lastItem = breeds.last {
-            // If we are at the last item, load next page
-            if item.id == lastItem.id {
-                loadNextPage()
+            guard !isLastPage, !isLoadingPage else {
+                return
             }
-        }
-    }
-
-    private func loadNextPage() {
-        Task {
             isLoadingPage = true
-            breeds = await repository.getNextPage()
-            isLoadingPage = false
+            defer {
+                isLoadingPage = false
+            }
+            do {
+                let nextBreeds = try await nextBreedUseCase.execute(page: currentPage, limit: limit)
+                guard !nextBreeds.isEmpty else {
+                    isLastPage = true
+                    return
+                }
+                currentPage += 1
+                breeds.append(contentsOf: nextBreeds)
+            } catch {
+                self.error = error
+            }
         }
     }
 }

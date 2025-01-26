@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CatBreedsListView: View {
-    @ObservedObject var viewModel: CatBreedsViewModel
+    @StateObject var viewModel: CatBreedsViewModel
 
     // Two-column flexible layout
     private let columns = [
@@ -26,7 +26,7 @@ struct CatBreedsListView: View {
                                 CatBreedCardView(breed: breed)
                                     .frame(width: (geometry.size.width - 32 - 16) / 2, height: (geometry.size.width - 32 - 16) / 2)
                                     .onAppear {
-                                        viewModel.loadNextPageIfNeeded(currentItem: breed)
+                                        viewModel.loadNextPageOfBreeds()
                                     }
                             }
                         }
@@ -37,7 +37,14 @@ struct CatBreedsListView: View {
             .navigationTitle("Cat Breeds")
             .onAppear {
                 guard viewModel.breeds.isEmpty, !viewModel.isLoadingPage else { return }
-                viewModel.loadInitialBreeds()
+                viewModel.loadNextPageOfBreeds()
+            }
+            .alert(isPresented: $viewModel.error.isNotNil()) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text(viewModel.error?.localizedDescription ?? "Something went wrong"),
+                    dismissButton: .default(Text("Ok"))
+                )
             }
             Text("No Selection")
                 .font(.headline)

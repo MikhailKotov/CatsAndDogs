@@ -16,8 +16,12 @@ final class CatService: CatServiceProtocol {
     private let baseURL: String
     private let apiKey: String
 
-    init(session: URLSession = .shared, apiKey: String, baseURL: String) {
-        self.session = session
+    init(apiKey: String, baseURL: String) {
+        self.session = {
+            let configuration = URLSessionConfiguration.default
+            configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+            return URLSession(configuration: configuration)
+        }()
         self.apiKey = apiKey
         self.baseURL = baseURL
     }
@@ -36,7 +40,7 @@ final class CatService: CatServiceProtocol {
         var request = URLRequest(url: url)
         // The Cat API expects an "x-api-key" header
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
-
+        print(request.url?.absoluteString ?? "N/A")
         let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse,
@@ -45,7 +49,9 @@ final class CatService: CatServiceProtocol {
             throw URLError(.badServerResponse)
         }
         do {
-            return try JSONDecoder().decode([Breed].self, from: data)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode([Breed].self, from: data)
         } catch {
             print(error)
             print("\n\n\n")

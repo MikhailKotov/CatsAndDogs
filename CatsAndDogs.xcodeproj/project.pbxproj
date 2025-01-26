@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D73E16872D31743C00EF3F38 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = D73E16862D31743C00EF3F38 /* Factory */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D7625DFE2D1EEACA004A1488 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -39,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D73E16872D31743C00EF3F38 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +95,7 @@
 			);
 			name = CatsAndDogs;
 			packageProductDependencies = (
+				D73E16862D31743C00EF3F38 /* Factory */,
 			);
 			productName = CatsAndDogs;
 			productReference = D7625DBF2D1E9CE1004A1488 /* CatsAndDogs.app */;
@@ -146,6 +152,9 @@
 			);
 			mainGroup = D7625DB62D1E9CE1004A1488;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D73E16852D31743C00EF3F38 /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D7625DC02D1E9CE1004A1488 /* Products */;
 			projectDirPath = "";
@@ -446,6 +455,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D73E16852D31743C00EF3F38 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D73E16862D31743C00EF3F38 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D73E16852D31743C00EF3F38 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D7625DB72D1E9CE1004A1488 /* Project object */;
 }

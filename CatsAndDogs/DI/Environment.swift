@@ -15,11 +15,11 @@ enum EnvironmentKey {
         switch self {
         case .test:
             let baseURL = "https://api.thecatapi.com/v1/breeds"
-            let apiKey = "live_UVs6JegVjd25LLtL7UHNpoQxzszMXaht2pJ9komCPG4KtKkfALFcQGrvc4eErrK8"
+            let apiKey = "APIKEY"
             return .init(baseURL: baseURL, apiKey: apiKey)
         case .production:
             let baseURL = "https://api.thecatapi.com/v1/breeds"
-            let apiKey = "live_UVs6JegVjd25LLtL7UHNpoQxzszMXaht2pJ9komCPG4KtKkfALFcQGrvc4eErrK8"
+            let apiKey = "APIKEY"
             return .init(baseURL: baseURL, apiKey: apiKey)
         }
     }

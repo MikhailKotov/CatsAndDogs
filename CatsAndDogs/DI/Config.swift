@@ -19,7 +19,7 @@ struct Config {
         apiKey = ""
         baseURL = ""
         #else // PROD
-        apiKey = "live_UVs6JegVjd25LLtL7UHNpoQxzszMXaht2pJ9komCPG4KtKkfALFcQGrvc4eErrK8"
+        apiKey = ""
         baseURL = "https://api.thecatapi.com/v1/breeds"
         #endif
     }

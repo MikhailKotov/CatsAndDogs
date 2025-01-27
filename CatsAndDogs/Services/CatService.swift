@@ -48,16 +48,8 @@ final class CatService: CatServiceProtocol {
         else {
             throw URLError(.badServerResponse)
         }
-        do {
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            return try decoder.decode([Breed].self, from: data)
-        } catch {
-            print(error)
-            print("\n\n\n")
-            print(String(data: data, encoding: .utf8))
-            print("\n\n\n")
-            throw error
-        }
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return try decoder.decode([Breed].self, from: data)
     }
 }
